@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Portfolio</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Student Portfolio</h1>
+  </header>
+  <main>
+    <!-- Portfolio sections will be added here -->
+  </main>
+  <footer>
+    <p>&copy; 2023 Your Name</p>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>
+/* styles.css */
+
+/* Reset some default styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Basic styles */
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+}
+
+header {
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+}
+
+header h1 {
+  margin: 0;
+}
+
+main {
+  padding: 20px;
+}
+
+footer {
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+}
+// script.js
+
+// Sample data for portfolio sections
+const portfolioSections = [
+  {
+    title: 'Projects',
+    items: [
+      { name: 'Project 1', description: 'Lorem ipsum dolor sit amet.' },
+      { name: 'Project 2', description: 'Consectetur adipiscing elit.' },
+    ]
+  },
+  {
+    title: 'Skills',
+    items: ['HTML', 'CSS', 'JavaScript']
+  },
+  {
+    title: 'Education',
+    items: [
+      { name: 'School 1', degree: 'Bachelor of Science' },
+      { name: 'School 2', degree: 'Master of Arts' },
+    ]
+  }
+];
+
+// Function to generate portfolio sections dynamically
+function generatePortfolioSections() {
+  const main = document.querySelector('main');
+  
+  portfolioSections.forEach(section => {
+    const sectionDiv = document.createElement('div');
+    sectionDiv.classList.add('portfolio-section');
+    
+    const title = document.createElement('h2');
+    title.textContent = section.title;
+    
+    sectionDiv.appendChild(title);
+    
+    if (Array.isArray(section.items)) {
+      const list = document.createElement('ul');
+      
+      section.items.forEach(item => {
+        const listItem = document.createElement('li');
+        
+        if (typeof item === 'string') {
+          listItem.textContent = item;
+        } else {
+          const itemTitle = document.createElement('h3');
+          itemTitle.textContent = item.name;
+          
+          const itemDescription = document.createElement('p');
+          itemDescription.textContent = item.description || item.degree;
+          
+          listItem.appendChild(itemTitle);
+          listItem.appendChild(itemDescription);
+        }
+        
+        list.appendChild(listItem);
+      });
+      
+      sectionDiv.appendChild(list);
+    }
+    
+    main.appendChild(sectionDiv);
+  });
+}
+
+// Call the function to generate portfolio sections when the page loads
+window.addEventListener('load', generatePortfolioSections);
